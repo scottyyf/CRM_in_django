@@ -39,7 +39,14 @@ class ProjectAdmin(CrmAdmin, admin.ModelAdmin):
         if request.user.is_superuser:
             return ()
 
+        # 新增一个项目时，obj为空
+        if not obj:
+            return ()
+
         return ('budget', 'get_percent', 'project_id')
+
+    def has_add_permission(self, request):
+        return True
 
 
 
