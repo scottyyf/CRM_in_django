@@ -61,16 +61,17 @@ class BidsInfo(models.Model):
     project_id = models.ForeignKey(Projects, on_delete=models.CASCADE,
                                    null=True, blank=True, verbose_name='项目id',
                                    help_text='项目id', related_name='bids_info')
-    status = models.CharField(max_length=20, choices=CHOICES,
+    # 因为choice的第0个字段是int类型， 所以这个字段应该和他匹配
+    status = models.SmallIntegerField(max_length=20, choices=CHOICES,
                               verbose_name='投标状态', help_text='投标状态')
-    money = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='中标金额', help_text='中标金额')
+    money = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='中标金额', help_text='中标金额', default=0)
     shangwu = models.ForeignKey(User, on_delete=models.CASCADE,
                                 blank=True, null=True, verbose_name='商务',
                                 help_text='商务', related_name='bids_info')
     department = models.ForeignKey(Department, on_delete=models.CASCADE,
                                    blank=True, null=True, verbose_name='商务部门',
                                    help_text='商务部门', related_name='bids_info')
-    status_desc = models.TextField(verbose_name='状态信息', help_text='状态信息')
+    status_desc = models.TextField(verbose_name='状态信息', help_text='状态信息', default='null')
 
     class Meta:
         db_table = 'sky_bids_info'

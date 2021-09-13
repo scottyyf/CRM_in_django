@@ -7,4 +7,4 @@ class UserAppConfig(AppConfig):
 
     # 展示选项条目的名称，而不用user_app
     # 首页 › 用户级别管理 › 用户管理 › admin
-    verbose_name = '用户级别管理'
+    verbose_name = '1. 用户级别管理'
