@@ -4,4 +4,4 @@ from django.apps import AppConfig
 class ProjectAppConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'project_app'
-    verbose_name = '项目管理'
+    verbose_name = '2. 项目管理'

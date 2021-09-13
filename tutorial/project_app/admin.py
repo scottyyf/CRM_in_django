@@ -1,10 +1,11 @@
 from django.contrib import admin
 
 # Register your models here.
-from project_app.models import Projects, Processes
+from project_app.models import Projects, Processes, BidsInfo
 from utils.CrmAdmin import CrmAdmin
 
 
+# 下面这两个inline只是展示的样式不一样
 # 将两个表 或多个表 放在同一个admin去处理， 用Inline
 class ProcessesInline(admin.StackedInline):
     model = Processes
@@ -12,10 +13,15 @@ class ProcessesInline(admin.StackedInline):
     extra = 1
 
 
+class BidsInfoInline(admin.TabularInline):
+    model = BidsInfo
+    extra = 1
+
+
 @admin.register(Projects)
 class ProjectAdmin(CrmAdmin, admin.ModelAdmin):
     # inline的对象出现在该对象中，用户可以查看
-    inlines = [ProcessesInline,]
+    inlines = [ProcessesInline, BidsInfoInline]
 
     list_display = ('name', 'project_id')
     fields = ('name', 'project_id', 'budget', 'get_percent', 'customer',

@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+from project_app.models import Projects
 
 
 class Contract(models.Model):
@@ -16,9 +17,11 @@ class Contract(models.Model):
     contact_man = models.CharField(max_length=25, verbose_name='联系人', help_text='联系人')
     contact_way = models.CharField(max_length=25, verbose_name='联系方式', help_text='练习方式')
     sign_at = models.DateTimeField(auto_now_add=True, verbose_name='签订时间', help_text='签订时间')
-    is_accepted = models.CharField(choices=ACCEPTED, max_length=20, verbose_name='交货验收',
+    is_accepted = models.SmallIntegerField(choices=ACCEPTED, max_length=20, verbose_name='交货验收',
                                    help_text='交货验收')
     accepted_info = models.TextField(verbose_name='验收信息', help_text='验收信息')
+    project_id = models.OneToOneField(Projects, verbose_name='项目id', on_delete=models.CASCADE,
+                                      related_name='contract_info', null=True, blank=True)
 
     class Meta:
         db_table = 'sky_contracts'
